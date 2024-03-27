@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cst438</groupId>
-	<artifactId>Assignment2</artifactId>
+	<artifactId>Assignment2_07</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Lab3</name>
 	<description>cst438 assignment 2</description>
@@ -42,11 +42,33 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-			<version>3.1.0.RELEASE</version>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>6.2.2</version>
+        </dependency>
+        <!-- for selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.18.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v122</artifactId>
+            <version>4.18.1</version>
+        </dependency>
+        <!-- end selenium -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -74,7 +96,7 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
-	</repositories>
+    </repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-milestones</id>

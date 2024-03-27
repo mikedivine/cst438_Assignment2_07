@@ -9,6 +9,7 @@ public record AssignmentDTO(
         String title,
         String dueDate,
         String courseId,
+        String courseTitle,
         int secId,
         int secNo
 

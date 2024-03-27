@@ -27,6 +27,7 @@ public class UserController {
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    // List All users
     @GetMapping("/users")
     public List<UserDTO> findAllUsers() {
 
@@ -38,6 +39,7 @@ public class UserController {
         return userDTO_list;
     }
 
+    // Create new user
     @PostMapping("/users")
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         User user = new User();
@@ -60,6 +62,7 @@ public class UserController {
         return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getType());
     }
 
+    // update a User
     @PutMapping("/users")
     public UserDTO updateUser(@RequestBody UserDTO userDTO) {
         User user = userRepository.findById(userDTO.id()).orElse(null);
@@ -79,13 +82,12 @@ public class UserController {
         return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getType());
     }
 
+    // delete a user
     @DeleteMapping("/users/{id}")
     public void  updateUser(@PathVariable("id") int id) {
         User user = userRepository.findById(id).orElse(null);
         if (user!=null) {
             userRepository.delete(user);
         }
-
     }
-
 }

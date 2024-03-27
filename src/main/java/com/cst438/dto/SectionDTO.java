@@ -13,6 +13,7 @@ public record SectionDTO(
         String building,
         String room,
         String times,
+        String courseTitle,
         String instructorName,
         String instructorEmail
 

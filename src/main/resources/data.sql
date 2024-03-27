@@ -38,7 +38,8 @@ insert into section(section_no, course_id, sec_id, term_id, building, room, time
 insert into enrollment (enrollment_id, grade, section_no, user_id ) values
 (1, 'A', 1, 3),
 (2, 'B', 8, 3),
-(3,  null, 10, 3);
+(3,  null, 10, 3),
+(4, 'A', 8, 4);
 
 insert into assignment (assignment_id, section_no, title, due_date) values
 ( 1, 8, 'db homework 1', '2024-02-01'),

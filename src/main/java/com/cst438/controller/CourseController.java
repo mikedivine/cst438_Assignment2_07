@@ -26,9 +26,6 @@ public class CourseController {
     CourseRepository courseRepository;
 
     @Autowired
-    SectionRepository sectionRepository;
-
-    @Autowired
     TermRepository termRepository;
 
     @Autowired

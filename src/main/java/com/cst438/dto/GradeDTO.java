@@ -10,6 +10,4 @@ public record GradeDTO(
         String courseId,
         int sectionId,
         Integer score
-) {
-
-}
+) {}

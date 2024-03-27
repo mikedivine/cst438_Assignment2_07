@@ -46,6 +46,7 @@ public class SectionControllerUnitTest {
                 "052",
                 "104",
                 "W F 1:00-2:50 pm",
+                "Test Course",
                 "Joshua Gross",
                 "jgross@csumb.edu"
         );
@@ -107,6 +108,7 @@ public class SectionControllerUnitTest {
                 "052",
                 "104",
                 "W F 1:00-2:50 pm",
+            "Test Course",
                 "Joshua Gross",
                 "jgross@csumb.edu"
         );
@@ -121,8 +123,8 @@ public class SectionControllerUnitTest {
                 .andReturn()
                 .getResponse();
 
-        // response should be 400, BAD_REQUEST
-        assertEquals(400, response.getStatus());
+        // response should be 404, NOT_FOUND
+        assertEquals(404, response.getStatus());
 
         // check the expected error message
         String message = response.getErrorMessage();
@@ -138,7 +140,7 @@ public class SectionControllerUnitTest {
         }
     }
 
-    private static <T> T  fromJsonString(String str, Class<T> valueType ) {
+    private static <T> T fromJsonString(String str, Class<T> valueType ) {
         try {
             return new ObjectMapper().readValue(str, valueType);
         } catch (Exception e) {

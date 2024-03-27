@@ -18,7 +18,7 @@ public class SectionControllerSystemTest {
     //  for WinOS the file name will be chromedriver.exe
     //  for MacOS the file name will be chromedriver
     public static final String CHROME_DRIVER_FILE_LOCATION =
-            "C:/chromedriver_win32/chromedriver.exe";
+            "C:/chromedriver_win64/chromedriver.exe";
 
     //public static final String CHROME_DRIVER_FILE_LOCATION =
     //        "~/chromedriver_macOS/chromedriver";
@@ -95,8 +95,8 @@ public class SectionControllerSystemTest {
                 Thread.sleep(SLEEP_DURATION);
                 // find the YES to confirm button
                 List<WebElement> confirmButtons = driver
-                        .findElement(By.className("react-confirm-alert-button-group"))
-                        .findElements(By.tagName("button"));
+                  .findElement(By.className("react-confirm-alert-button-group"))
+                  .findElements(By.tagName("button"));
                 assertEquals(2, confirmButtons.size());
                 confirmButtons.get(0).click();
                 Thread.sleep(SLEEP_DURATION);
@@ -158,7 +158,7 @@ public class SectionControllerSystemTest {
 
     }
 
-   @Test
+    @Test
     public void systemTestAddSectionBadCourse() throws Exception {
         // attempt to add a section to course cst599 2024, Spring
         // fails because course does not exist
@@ -166,21 +166,21 @@ public class SectionControllerSystemTest {
         // verify success
         // delete the section
 
-       // click link to navigate to Sections
-       WebElement we = driver.findElement(By.id("sections"));
-       we.click();
-       Thread.sleep(SLEEP_DURATION);
+        // click link to navigate to Sections
+        WebElement we = driver.findElement(By.id("sections"));
+        we.click();
+        Thread.sleep(SLEEP_DURATION);
 
-       // enter cst, 2024, Spring and click search sections
-       driver.findElement(By.id("scourseId")).sendKeys("cst");
-       driver.findElement(By.id("syear")).sendKeys("2024");
-       driver.findElement(By.id("ssemester")).sendKeys("Spring");
-       driver.findElement(By.id("search")).click();
-       Thread.sleep(SLEEP_DURATION);
+        // enter cst, 2024, Spring and click search sections
+        driver.findElement(By.id("scourseId")).sendKeys("cst");
+        driver.findElement(By.id("syear")).sendKeys("2024");
+        driver.findElement(By.id("ssemester")).sendKeys("Spring");
+        driver.findElement(By.id("search")).click();
+        Thread.sleep(SLEEP_DURATION);
 
-       // verify that cst499 is not in the list of sections
-       // Selenium throws NoSuchElementException when the element is not found
-       try {
+        // verify that cst499 is not in the list of sections
+        // Selenium throws NoSuchElementException when the element is not found
+        try {
            while (true) {
                WebElement row499 = driver.findElement(By.xpath("//tr[td='cst499']"));
                List<WebElement> buttons = row499.findElements(By.tagName("button"));
@@ -196,34 +196,34 @@ public class SectionControllerSystemTest {
                confirmButtons.get(0).click();
                Thread.sleep(SLEEP_DURATION);
            }
-       } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
            // do nothing, continue with test
-       }
+        }
 
-       // find and click button to add a section
-       driver.findElement(By.id("addSection")).click();
-       Thread.sleep(SLEEP_DURATION);
+        // find and click button to add a section
+        driver.findElement(By.id("addSection")).click();
+        Thread.sleep(SLEEP_DURATION);
 
-       // enter data
-       //  courseId: cst599
-       driver.findElement(By.id("ecourseId")).sendKeys("cst599");
-       //  secId: 1,
-       driver.findElement(By.id("esecId")).sendKeys("1");
-       //  year:2024,
-       driver.findElement(By.id("eyear")).sendKeys("2024");
-       //  semester:Spring,
-       driver.findElement(By.id("esemester")).sendKeys("Spring");
-       //  building:052,
-       driver.findElement(By.id("ebuilding")).sendKeys("052");
-       //  room:104,
-       driver.findElement(By.id("eroom")).sendKeys("104");
-       //  times:W F 1:00-2:50 pm,
-       driver.findElement(By.id("etimes")).sendKeys("W F 1:00-2:50 pm");
-       //  instructorEmail jgross@csumb.edu
-       driver.findElement(By.id("einstructorEmail")).sendKeys("jgross@csumb.edu");
-       // click Save
-       driver.findElement(By.id("save")).click();
-       Thread.sleep(SLEEP_DURATION);
+        // enter data
+        //  courseId: cst599
+        driver.findElement(By.id("ecourseId")).sendKeys("cst599");
+        //  secId: 1,
+        driver.findElement(By.id("esecId")).sendKeys("1");
+        //  year:2024,
+        driver.findElement(By.id("eyear")).sendKeys("2024");
+        //  semester:Spring,
+        driver.findElement(By.id("esemester")).sendKeys("Spring");
+        //  building:052,
+        driver.findElement(By.id("ebuilding")).sendKeys("052");
+        //  room:104,
+        driver.findElement(By.id("eroom")).sendKeys("104");
+        //  times:W F 1:00-2:50 pm,
+        driver.findElement(By.id("etimes")).sendKeys("W F 1:00-2:50 pm");
+        //  instructorEmail jgross@csumb.edu
+        driver.findElement(By.id("einstructorEmail")).sendKeys("jgross@csumb.edu");
+        // click Save
+        driver.findElement(By.id("save")).click();
+        Thread.sleep(SLEEP_DURATION);
 
         WebElement msg = driver.findElement(By.id("addMessage"));
         String message = msg.getText();
@@ -232,36 +232,36 @@ public class SectionControllerSystemTest {
         // clear the courseId field and enter cst499
         WebElement courseId = driver.findElement(By.id("ecourseId"));
         courseId.sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-       Thread.sleep(SLEEP_DURATION);
+        Thread.sleep(SLEEP_DURATION);
         courseId.sendKeys("cst499");
         driver.findElement(By.id("save")).click();
         Thread.sleep(SLEEP_DURATION);
 
-       message = driver.findElement(By.id("addMessage")).getText();
-       assertTrue(message.startsWith("section added"));
+        message = driver.findElement(By.id("addMessage")).getText();
+        assertTrue(message.startsWith("section added"));
 
-       // close the dialog
-       driver.findElement(By.id("close")).click();
-       Thread.sleep(SLEEP_DURATION);
+        // close the dialog
+        driver.findElement(By.id("close")).click();
+        Thread.sleep(SLEEP_DURATION);
 
         WebElement row = driver.findElement(By.xpath("//tr[td='cst499']"));
         assertNotNull(row);
-       // find the delete button on the row from prior statement.
-       List<WebElement> deleteButtons = row.findElements(By.tagName("button"));
-       // delete is the second button
-       assertEquals(2, deleteButtons.size());
-       deleteButtons.get(1).click();
-       Thread.sleep(SLEEP_DURATION);
-       // find the YES to confirm button
-       List<WebElement> confirmButtons = driver
+        // find the delete button on the row from prior statement.
+        List<WebElement> deleteButtons = row.findElements(By.tagName("button"));
+        // delete is the second button
+        assertEquals(2, deleteButtons.size());
+        deleteButtons.get(1).click();
+        Thread.sleep(SLEEP_DURATION);
+        // find the YES to confirm button
+        List<WebElement> confirmButtons = driver
                .findElement(By.className("react-confirm-alert-button-group"))
                .findElements(By.tagName("button"));
-       assertEquals(2,confirmButtons.size());
-       confirmButtons.get(0).click();
-       Thread.sleep(SLEEP_DURATION);
+        assertEquals(2,confirmButtons.size());
+        confirmButtons.get(0).click();
+        Thread.sleep(SLEEP_DURATION);
 
-       // verify that Section list is empty
-       assertThrows(NoSuchElementException.class, () ->
+        // verify that Section list is empty
+        assertThrows(NoSuchElementException.class, () ->
                driver.findElement(By.xpath("//tr[td='cst499']")));
     }
 }

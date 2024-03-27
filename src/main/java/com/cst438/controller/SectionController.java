@@ -33,7 +33,7 @@ public class SectionController {
 
         Course course = courseRepository.findById(section.courseId()).orElse(null);
         if (course == null ){
-            throw  new ResponseStatusException( HttpStatus.NOT_FOUND, "course not found "+section.courseId());
+            throw  new ResponseStatusException( HttpStatus.NOT_FOUND, "course not found " + section.courseId());
         }
         Section s = new Section();
         s.setCourse(course);
@@ -70,6 +70,7 @@ public class SectionController {
                 s.getBuilding(),
                 s.getRoom(),
                 s.getTimes(),
+                course.getTitle(),
                 (instructor!=null) ? instructor.getName() : "",
                 (instructor!=null) ? instructor.getEmail() : ""
         );
@@ -102,7 +103,7 @@ public class SectionController {
     }
 
     // ADMIN function to create a delete section
-    // delete will fail there are related assignments or enrollments
+    // delete will fail if there are related assignments or enrollments
     @DeleteMapping("/sections/{sectionno}")
     public void deleteSection(@PathVariable int sectionno) {
         Section s = sectionRepository.findById(sectionno).orElse(null);
@@ -126,6 +127,7 @@ public class SectionController {
 
         List<SectionDTO> dto_list = new ArrayList<>();
         for (Section s : sections) {
+            Course course = s.getCourse();
             User instructor = null;
             if (s.getInstructorEmail()!=null) {
                 instructor = userRepository.findByEmail(s.getInstructorEmail());
@@ -139,6 +141,7 @@ public class SectionController {
                     s.getBuilding(),
                     s.getRoom(),
                     s.getTimes(),
+                    course.getTitle(),
                     (instructor!=null) ? instructor.getName() : "",
                     (instructor!=null) ? instructor.getEmail() : ""
             ));
@@ -160,6 +163,7 @@ public class SectionController {
 
         List<SectionDTO> dto_list = new ArrayList<>();
         for (Section s : sections) {
+            Course course = s.getCourse();
             User instructor = null;
             if (s.getInstructorEmail()!=null) {
                 instructor = userRepository.findByEmail(s.getInstructorEmail());
@@ -173,13 +177,15 @@ public class SectionController {
                     s.getBuilding(),
                     s.getRoom(),
                     s.getTimes(),
+                    course.getTitle(),
                     (instructor!=null) ? instructor.getName() : "",
                     (instructor!=null) ? instructor.getEmail() : ""
             ));
         }
         return dto_list;
     }
-	
+
+    // List available Sections for Enrollment
     @GetMapping("/sections/open")
     public List<SectionDTO> getOpenSectionsForEnrollment() {
 
@@ -187,6 +193,7 @@ public class SectionController {
 
         List<SectionDTO> dlist = new ArrayList<>();
         for (Section s : sections) {
+            Course course = s.getCourse();
             User instructor = userRepository.findByEmail(s.getInstructorEmail());
             dlist.add( new SectionDTO(
                     s.getSectionNo(),
@@ -197,6 +204,7 @@ public class SectionController {
                     s.getBuilding(),
                     s.getRoom(),
                     s.getTimes(),
+                    course.getTitle(),
                     (instructor!=null) ? instructor.getName() : "",
                     (instructor!=null) ? instructor.getEmail() : ""
             ));
